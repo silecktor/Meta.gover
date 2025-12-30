@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Законодательная база Цифрового штата San-Andreas | MetaRP</title>
+    <link rel="icon" type="image/x-icon" href="/images/icon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">SAN-ANDREAS <span>GOVERNMENT</span></div>
+    <ul class="nav-links">
+        <li><a href="index.html">Главная</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropbtn">Ветви власти <span class="arrow">▼</span></a>
+            <ul class="dropdown-content">
+                <li><a href="departments.html">Исполнительная власть</a></li>
+                <li><a href="legislative.html">Законодательная власть</a></li>
+                <li><a href="court.html">Судебная власть</a></li>
+            </ul>
+        </li>
+
+        <li><a href="appeals.html">Заявления</a></li>
+    </ul>
+</nav>
+
+
+    <main class="section-container">
+        <header class="legis-header">
+            <h1 class="page-title">ЗАКОНОДАТЕЛЬНАЯ БАЗА</h1>
+            <p class="subtitle">Фундамент цифрового правопорядка: нормативно-правовые акты штата San Andreas.</p>
+        </header>
+
+        <hr class="cyber-divider">
+
+        <div id="constitution-container"></div>
+
+        <div id="dynamic-categories-container"></div>
+    </main>
+
+    <script src="laws_data.js"></script>
+    <script>
+        function renderLaws() {
+            const constContainer = document.getElementById('constitution-container');
+            const catsContainer = document.getElementById('dynamic-categories-container');
+            
+            if (typeof lawsData === 'undefined') return;
+
+            // 1. Рендерим Конституцию
+            const c = lawsData.constitution;
+            constContainer.innerHTML = `
+                <div class="law-item constitution-special">
+                    <div class="law-info">
+                        <h3 class="law-title">${c.title}</h3>
+                        <p class="law-date">Высший нормативный акт штата | Обновлено: <span>${c.lastUpdate}</span></p>
+                    </div>
+                    <a href="${c.link}" target="_blank" class="law-btn">ОТКРЫТЬ ДОКУМЕНТ</a>
+                </div>
+            `;
+
+            // 2. Рендерим категории и их содержимое
+            catsContainer.innerHTML = lawsData.categories.map(cat => `
+                <div class="law-category-section">
+                    <h2 class="category-title"><span class="neon-text">/</span> ${cat.name}</h2>
+                    <div class="laws-grid">
+                        ${cat.items.map(law => `
+                            <div class="law-item">
+                                <div class="law-info">
+                                    <h3 class="law-title">${law.title}</h3>
+                                    <p class="law-date">Последнее изменение: <span>${law.lastUpdate}</span></p>
+                                </div>
+                                <a href="${law.link}" target="_blank" class="law-btn">ЧИТАТЬ</a>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+        document.addEventListener('DOMContentLoaded', renderLaws);
+    </script>
+</body>
+</html>

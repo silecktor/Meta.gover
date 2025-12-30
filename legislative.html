@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Законодательная власть Цифрового штата San-Andreas | MetaRP</title>
+    <link rel="icon" type="image/x-icon" href="/images/icon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+    <div class="logo">SAN-ANDREAS <span>GOVERNMENT</span></div>
+    <ul class="nav-links">
+        <li><a href="index.html">Главная</a></li>
+        
+        <li class="dropdown">
+            <a href="#" class="dropbtn">Ветви власти <span class="arrow">▼</span></a>
+            <ul class="dropdown-content">
+                <li><a href="departments.html">Исполнительная власть</a></li>
+                <li><a href="court.html">Судебная власть</a></li>
+            </ul>
+        </li>
+
+        <li><a href="laws.html">Законодательная база</a></li>
+        <li><a href="appeals.html">Заявления</a></li>
+    </ul>
+</nav>
+
+    <main class="section-container">
+    <header class="legis-header">
+        <h1 class="page-title">ЗАКОНОДАТЕЛЬНАЯ ВЛАСТЬ</h1>
+        <p class="subtitle">Законодательный совет цифрового штата San Andreas</p>
+    </header>
+
+    <div class="officials-grid" id="management-container"></div>
+
+    <div class="advisors-section">
+        <button class="accordion-btn" onclick="toggleAdvisors()" style="justify-content: center;">
+            СПИСОК СОВЕТНИКОВ <span id="arrow" style="margin-left: 10px;">▼</span>
+        </button>
+        
+        <div id="advisors-panel" class="panel">
+            <div class="officials-grid" id="advisors-container" style="padding: 20px;"></div>
+        </div>
+    </div>
+
+    <div class="protocols-wrapper">
+        <a href="#" target="_blank" class="link-structure protocols-btn">
+            РЕЕСТР ПРОТОКОЛОВ ЗАСЕДАНИЙ СОВЕТА
+        </a>
+    </div>
+</main>
+
+<script src="legislative_data.js"></script>
+<script>
+    function renderLegislative() {
+        const mgmtContainer = document.getElementById('management-container');
+        const advisorsContainer = document.getElementById('advisors-container');
+
+        // Рендер руководства
+        const mgmt = legislativeData.management;
+        mgmtContainer.innerHTML = `
+            <div class="official-card head-card">
+                <img src="${mgmt.speaker.photo}" class="card-photo">
+                <div class="card-info">
+                    <h4>${mgmt.speaker.name}</h4>
+                    <p class="post">${mgmt.speaker.post}</p>
+                </div>
+            </div>
+            <div class="official-card">
+                <img src="${mgmt.deputy.photo}" class="card-photo">
+                <div class="card-info">
+                    <h4>${mgmt.deputy.name}</h4>
+                    <p class="post">${mgmt.deputy.post}</p>
+                </div>
+            </div>
+        `;
+
+        // Рендер советников
+        advisorsContainer.innerHTML = legislativeData.advisors.map(adv => `
+            <div class="official-card mini">
+                <div class="card-info">
+                    <h4>${adv.name}</h4>
+                    <p class="post">Мандат: ${adv.mandate}</p>
+                    <p class="id-tag">UID: ${adv.uid}</p>
+                    <p class="dept-tag" style="color: #00f2ff; font-size: 0.8rem; margin-top: 5px;">
+                        [ ${adv.source} ]
+                    </p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function toggleAdvisors() {
+        const panel = document.getElementById("advisors-panel");
+        const arrow = document.getElementById("arrow");
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+            arrow.innerText = "▼";
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            arrow.innerText = "▲";
+        }
+    }
+
+    // Запуск при загрузке
+    document.addEventListener('DOMContentLoaded', renderLegislative);
+</script>
+</body>
+</html>

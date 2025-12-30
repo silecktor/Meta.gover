@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Судебная власть Цифрового штата San-Andreas | MetaRP</title>
+    <link rel="icon" type="image/x-icon" href="/images/icon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">SAN-ANDREAS <span>GOVERNMENT</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Главная</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Ветви власти <span class="arrow">▼</span></a>
+                <ul class="dropdown-content">
+                    <li><a href="departments.html">Исполнительная власть</a></li>
+                    <li><a href="legislative.html">Законодательная власть</a></li>
+                    <li><a href="court.html">Судебная власть</a></li>
+                </ul>
+            </li>
+            <li><a href="laws.html">Законодательная база</a></li>
+            <li><a href="appeals.html">Заявления</a></li>
+        </ul>
+    </nav>
+
+    <main class="section-container">
+        <header class="legis-header">
+            <h1 class="page-title">СУДЕБНАЯ ВЛАСТЬ</h1>
+            <p class="subtitle" style="color: #a855f7;">ДЕПАРТАМЕНТ ЦИФРОВОГО ПРАВОСУДИЯ</p>
+        </header>
+
+        <section class="court-intro">
+            <div class="intro-text">
+                <p>Судебная власть штата San Andreas функционирует как независимый арбитр в эпоху цифровой трансформации. Департамент правосудия обеспечивает соблюдение процессуальных норм и защиту прав резидентов через прозрачную систему регистрации исковых заявлений.</p>
+            </div>
+            <div class="intro-action">
+                <a href="appeals.html" target="_blank" class="btn-apply-court">ПОДАТЬ ИСКОВОЕ ЗАЯВЛЕНИЕ</a>
+            </div>
+        </section>
+
+        <h2 class="section-title"><span class="neon-text" style="color: #a855f7;">/</span> СУДЕЙСКИЙ КОРПУС</h2>
+        <div id="judges-container" class="officials-grid">
+            </div>
+
+        <div class="court-footer-links">
+            <a href="https://forum.metarp.net/threads/precedenty-verxovnogo-suda.4793/" class="footer-link-card purple-border">
+                <span class="icon">⚖️</span>
+                <h4>ПРЕЦЕДЕНТЫ ВС</h4>
+                <p>Архив ключевых судебных решений</p>
+            </a>
+            <a href="https://forum.metarp.net/threads/pravila-i-forma-podachi-iskovyx-zajavlenii-i-inyx-dokumentov-v-sud.4333/" class="footer-link-card gold-border">
+                <span class="icon">📜</span>
+                <h4>ПРАВИЛА ПОДАЧИ</h4>
+                <p>Регламент формирования обращений</p>
+            </a>
+        </div>
+    </main>
+
+    <div id="resultModal" class="court-modal" onclick="closeModal()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div id="modalBody"></div>
+            <button class="modal-close-btn" onclick="closeModal()">ЗАКРЫТЬ ПРОТОКОЛ</button>
+        </div>
+    </div>
+
+    <script src="judicial_data.js"></script>
+    <script src="court-logic.js"></script>
+</body>
+</html>
